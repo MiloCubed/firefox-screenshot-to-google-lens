@@ -2,15 +2,16 @@
 
 ## Usage
 
-This extension lets you send to Google Lens a screenshot of a web page either in viewport, in selection area or in full size!
+This extension lets you choose an area of the webpage to send to Google Lens.
 
-1. Access the add-on via the toolbar or [by assigning hotkeys](https://support.mozilla.org/en-US/kb/manage-extension-shortcuts-firefox). This will reveal the 3 options, "Selection", "Visible Area", and "Full Page", which determines the area to be screenshotted.
-2. Your selection will be screenshotted and will be sent to Google Lens.
-3. A new tab will open to lens.google.com with the screenshot loaded in.
+1. Click on this extension in the toolbar and select an area to screenshot; "Selection", "Visible Area", or "Full Page". You may also activate it these [via hotkeys](https://support.mozilla.org/en-US/kb/manage-extension-shortcuts-firefox).
+   1. Selection: Click and drag to select a specific region of the screen.
+   2. Visible Area: Screenshots whatever you are able to currently see on the screen.
+   3. Full Page: Screenshots everything in the page, including the parts that you normally have to scroll up/down to see.
+2. A new tab will open to lens.google.com with the screenshot loaded in.
 
 ## Credits
 
-This project was initially forked from MozillaOnline/easyscreenshot and modified to include functionality from typeling1578/Search-on-Google-Lens
+This project was first forked from MozillaOnline/easyscreenshot and modified to include functionality from typeling1578/Search-on-Google-Lens
 - [MozillaOnline/easyscreenshot](https://github.com/MozillaOnline/easyscreenshot) for the screenshot functionality
 - [typeling1578/Search-on-Google-Lens](https://github.com/typeling1578/Search-on-Google-Lens) for the sending to Google Lens functionality
-
