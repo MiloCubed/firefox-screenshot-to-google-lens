@@ -48,7 +48,7 @@
   ],
   "default_locale": "en_US",
   "description": "__MSG_extensionDescription__",
-  "homepage_url": "http://www.firefox.com.cn/",
+  "homepage_url": "https://github.com/MiloCubed/firefox-screenshot-to-google-lens",
   "icons": {
     "48": "icons/icon-48.png",
     "64": "icons/icon-64.png"
