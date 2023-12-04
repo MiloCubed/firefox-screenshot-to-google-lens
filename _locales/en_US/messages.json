@@ -1,12 +1,12 @@
 {
   "browserActionTitle": {
-    "message": "Firefox Screenshot to Google Lens"
+    "message": "Screenshot to Google Lens"
   },
   "extensionDescription": {
     "message": "This extension lets you choose an area of the webpage to send to Google Lens."
   },
   "extensionName": {
-    "message": "Firefox Screenshot to Google Lens"
+    "message": "Screenshot to Google Lens"
   },
   "minPanelWidth": {
     "message": "8em"
