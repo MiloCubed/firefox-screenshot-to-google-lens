@@ -87,7 +87,6 @@ function handleDownloadChange(downloadDelta) {
     notify(chrome.i18n.getMessage("save_failure"));
     return;
   }
-  document.getElementById("sound-export").play();
   chrome.downloads.search({
     id: downloadDelta.id
   }, function(results) {
@@ -145,7 +144,6 @@ function handleRuntimeMessage(message, sender, sendResponse) {
       let msgKey = message.failed ? "copy_failure" : "copy_success";
       notify(chrome.i18n.getMessage(msgKey));
       chrome.tabs.remove(sender.tab.id);
-      document.getElementById("sound-export").play();
       break;
     case "download":
       // why we still need the replacement?
@@ -176,7 +174,6 @@ function handleRuntimeMessage(message, sender, sendResponse) {
       sendResponse({ dataUri });
       dataUrisByTabId.delete(tabId);
       tabIdByEditorId.delete(sender.tab.id);
-      document.getElementById("sound-capture").play();
       break;
     case "popup_action":
       handlePopupAction(message, sender, sendResponse);
