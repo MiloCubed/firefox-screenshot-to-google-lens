@@ -98,18 +98,6 @@ var CropOverlay = {
   _hide() {
     this._overlay.overlay.style.display = "none";
   },
-  _keydown(evt) {
-    switch (evt.keyCode) {
-      case evt.DOM_VK_ESCAPE:
-        this.cancel();
-        break;
-      case evt.DOM_VK_RETURN:
-        this.stop();
-        break;
-      default:
-        break;
-    }
-  },
   _mousedown(evt) {
     var { x, y } = Utils.parse(this._overlay.overlay);
     var { x: ix, y: iy } = Utils.parse(this._overlay.target);
@@ -198,6 +186,7 @@ var CropOverlay = {
     document.removeEventListener("mouseup", this);
     evt.stopPropagation();
     evt.preventDefault();
+    this.stop();
   },
   _resize(evt) {
     this._display();
@@ -242,19 +231,16 @@ var CropOverlay = {
     window.addEventListener("keydown", this);
     window.addEventListener("resize", this);
   },
-  cancel() {
-    this._hide();
-    this._overlay.overlay.removeEventListener("dblclick", this);
-    this._overlay.overlay.removeEventListener("mousedown", this);
-    window.removeEventListener("keydown", this);
-    window.removeEventListener("resize", this);
-  },
   stop() {
     var parsed = Utils.parse(this._overlay.target);
     if (!parsed.w || !parsed.h) {
       return;
     }
-    this.cancel();
+    this._hide();
+    this._overlay.overlay.removeEventListener("dblclick", this);
+    this._overlay.overlay.removeEventListener("mousedown", this);
+    window.removeEventListener("keydown", this);
+    window.removeEventListener("resize", this);
     chrome.runtime.sendMessage(undefined, {
       dir: "content2bg",
       type: "popup_action", // not really
