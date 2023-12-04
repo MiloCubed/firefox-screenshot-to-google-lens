@@ -57,10 +57,6 @@
   "name": "__MSG_extensionName__",
   "permissions": [
     "<all_urls>",
-    "clipboardWrite",
-    "downloads",
-    "notifications",
-    "storage",
     "webRequest",
     "webRequestBlocking"
   ],
