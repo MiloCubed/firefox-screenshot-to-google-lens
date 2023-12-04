@@ -60,7 +60,6 @@ var CropOverlay = {
   handleEvent(evt) {
     switch (evt.type) {
       case "dblclick":
-      case "keydown":
       case "mousedown":
       case "mousemove":
       case "mouseup":
@@ -231,16 +230,19 @@ var CropOverlay = {
     window.addEventListener("keydown", this);
     window.addEventListener("resize", this);
   },
-  stop() {
-    var parsed = Utils.parse(this._overlay.target);
-    if (!parsed.w || !parsed.h) {
-      return;
-    }
+  cancel() {
     this._hide();
     this._overlay.overlay.removeEventListener("dblclick", this);
     this._overlay.overlay.removeEventListener("mousedown", this);
     window.removeEventListener("keydown", this);
     window.removeEventListener("resize", this);
+  },
+  stop() {
+    var parsed = Utils.parse(this._overlay.target);
+    if (!parsed.w || !parsed.h) {
+      return;
+    }
+    this.cancel();
     chrome.runtime.sendMessage(undefined, {
       dir: "content2bg",
       type: "popup_action", // not really
