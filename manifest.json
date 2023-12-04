@@ -26,11 +26,11 @@
       },
       "description": "__MSG_action_select__"
     },
-    "ess-entire": {
-      "description": "__MSG_action_entire__"
-    },
     "ess-visible": {
       "description": "__MSG_action_visible__"
+    },
+    "ess-entire": {
+      "description": "__MSG_action_entire__"
     }
   },
   "content_scripts": [
