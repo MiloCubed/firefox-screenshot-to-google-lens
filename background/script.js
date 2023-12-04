@@ -24,7 +24,7 @@ function getSnapshot(message, tab, sendResponse) {
         selected: (message.selected || {})
       }, function(options) {
         browser.tabs.captureTab(tab.id, options).then(dataUri => {
-          onCaptureEnded(tab.id, dataUri);
+          onCaptureEnded(tab, dataUri);
         });
       });
       break;
@@ -198,15 +198,130 @@ function notify(title, text) {
   });
 }
 
-function onCaptureEnded(tabId, dataUri) {
-  try {
-    dataUrisByTabId.set(tabId, dataUri);
+function generateRandomString(n) {
+  var s = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var str = "";
+  for (var i = 0; i < n; i++) {
+    str += s[Math.floor(Math.random() * s.length)];
+  }
+  return str;
+}
 
-    chrome.tabs.create({
-      openerTabId: tabId,
-      url: chrome.runtime.getURL("editor/page.html")
-    }, function(tab) {
-      tabIdByEditorId.set(tab.id, tabId);
+async function fetchPlus(url, options = {}) {
+  const requestId = generateRandomString(12);
+
+  let fetch_options = Object.assign({}, options);
+  fetch_options.headers = {
+    "Fetch-Plus-Request-Id": requestId,
+  };
+
+  const listener = function(details) {
+    let requestHeaders = details.requestHeaders;
+
+    for (const requestHeader of requestHeaders) {
+      if (requestHeader.name == "Fetch-Plus-Request-Id" &&
+        requestHeader.value == requestId) {
+        browser.webRequest.onBeforeSendHeaders.removeListener(listener);
+
+        requestHeaders =
+          requestHeaders.filter(requestHeader =>
+            requestHeader.name !== "Fetch-Plus-Request-Id"
+          );
+
+        for (const headerName of Object.keys(options.headers)) {
+          requestHeaders =
+            requestHeaders.filter(requestHeader =>
+                requestHeader.name.toLowerCase() !== headerName.toLowerCase()
+            );
+
+          requestHeaders.push({
+            name: headerName,
+            value: options.headers[headerName],
+          });
+        }
+
+        return { requestHeaders }
+      }
+    }
+  }
+  browser.webRequest.onBeforeSendHeaders.addListener(
+    listener,
+    { urls: [url] },
+    ["blocking", "requestHeaders"]
+  );
+
+  try {
+      return await fetch(url, fetch_options);
+  } catch (e) {
+      browser.webRequest.onBeforeSendHeaders.removeListener(listener);
+      throw e;
+  }
+}
+
+function onCaptureEnded(tab, dataUri) {
+  try {
+    const url_obj = new URL(tab.url);
+    fetchPlus(dataUri, {
+      headers: {
+        "Referer": url_obj.href,
+        "Origin": url_obj.origin,
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        return res.blob();
+      } else {
+        throw new Error(`${res.status} ${res.statusText}`);
+      }
+    }).then(data => {
+      // TODO
+      // resizeImage(data, {
+      //   mode: "maxSize",
+      //   maxWidth: 1000,
+      //   maxHeight: 1000,
+      //   forceEncode: true,
+      // })
+      let image_data_form = new FormData();
+      image_data_form.set("encoded_image", data);
+      image_data_form.set("image_url", `https://${generateRandomString(12)}.com/images/${generateRandomString(12)}`); // Send fake URL
+      image_data_form.set("sbisrc", "Chromium 98.0.4725.0 Windows");
+      fetch(`https://lens.google.com/upload?ep=ccm&s=&st=${generateRandomString(12)}`, {
+        method: "POST",
+        body: image_data_form,
+      }).then(res => {
+        if (res.status === 200) {
+          return res.text();
+        } else {
+          throw new Error(`${res.status} ${res.statusText}`);
+        }
+      }).then(data => {
+        const doc = (new DOMParser()).parseFromString(data, "text/html");
+        const url = doc
+                    ?.querySelector('meta[http-equiv="refresh"]')
+                    ?.getAttribute("content")
+                    ?.replace(" ", "")
+                    ?.split(";")
+                    ?.filter(str => str.startsWith("url="))
+                    ?.slice(-1)[0]
+                    ?.slice(4);
+
+        if (url) {
+          browser.tabs.sendMessage(tab.id, { type: "google-post-end" });
+          browser.tabs.create({
+            url: new URL(url, "https://lens.google.com").href,
+            windowId: tab.windowId,
+            openerTabId: tab.id,
+          });
+        } else {
+          throw new Error(`URL is not included in the result`);
+        }
+      }).catch(e => {
+        browser.tabs.sendMessage(tab.id, { type: "google-post-error" });
+        throw e;
+      });
+
+    }).catch(e => {
+      browser.tabs.sendMessage(tab.id, { type: "image-get-error" });
+      throw e;
     });
   } catch (ex) {
     console.error(ex);

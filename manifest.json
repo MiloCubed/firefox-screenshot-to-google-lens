@@ -69,7 +69,9 @@
     "clipboardWrite",
     "downloads",
     "notifications",
-    "storage"
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
   ],
   "version": "0.1.0"
 }
