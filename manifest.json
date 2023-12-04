@@ -12,21 +12,12 @@
     "browser_style": true,
     "default_area": "navbar",
     "default_icon": {
-      "16": "icons/browser_action-dark.svg",
-      "32": "icons/browser_action-dark.svg",
-      "64": "icons/browser_action-dark.svg"
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "64": "icons/icon-64.png"
     },
     "default_popup": "popup/page.html",
-    "default_title": "__MSG_browserActionTitle__",
-    "theme_icons": [{
-      "light": "icons/browser_action-light.svg",
-      "dark": "icons/browser_action-dark.svg",
-      "size": 16
-    }, {
-      "light": "icons/browser_action-light.svg",
-      "dark": "icons/browser_action-dark.svg",
-      "size": 32
-    }]
+    "default_title": "__MSG_browserActionTitle__"
   },
   "commands": {
     "ess-select": {
