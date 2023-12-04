@@ -1,7 +1,7 @@
 {
   "applications": {
     "gecko": {
-      "id": "screenshottogooglelens@milocubed.com",
+      "id": "{a84696fa-dfad-46a0-983c-b5a3fe60f085}",
       "strict_min_version": "82.0"
     }
   },
