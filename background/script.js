@@ -175,7 +175,7 @@ function onCaptureEnded(tab, dataUri) {
         throw new Error(`${res.status} ${res.statusText}`);
       }
     }).then(data => {
-      // TODO
+      // TODO https://github.com/typeling1578/Search-on-Google-Lens/blob/b681b5c80c67c10c2b7282eb42837f804a22c7bd/resizeImage.mjs#L1
       // resizeImage(data, {
       //   mode: "maxSize",
       //   maxWidth: 1000,
@@ -207,7 +207,7 @@ function onCaptureEnded(tab, dataUri) {
                     ?.slice(4);
 
         if (url) {
-          browser.tabs.sendMessage(tab.id, { type: "google-post-end" });
+          console.log("google-post-end");
           browser.tabs.create({
             url: new URL(url, "https://lens.google.com").href,
             windowId: tab.windowId,
@@ -217,12 +217,12 @@ function onCaptureEnded(tab, dataUri) {
           throw new Error(`URL is not included in the result`);
         }
       }).catch(e => {
-        browser.tabs.sendMessage(tab.id, { type: "google-post-error" });
+        console.log("google-post-error");
         throw e;
       });
 
     }).catch(e => {
-      browser.tabs.sendMessage(tab.id, { type: "image-get-error" });
+      console.log("image-get-error");
       throw e;
     });
   } catch (ex) {
