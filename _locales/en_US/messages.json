@@ -8,82 +8,11 @@
   "extensionName": {
     "message": "Easy Screenshot"
   },
-  "feedbackUrl": {
-    "message": "http://mozilla.com.cn/addon/325-easyscreenshot/"
-  },
   "minPanelWidth": {
     "message": "18em"
   },
   "generic_crop_instruction": {
     "message": "Drag to start, double click or press Enter to finish"
-  },
-  "editor_title": {
-    "message": "Firefox Screen Shot Editor"
-  },
-  "editor_color_tooltip": {
-    "message": "Choose a color"
-  },
-  "editor_crop_tooltip": {
-    "message": "Crop the snapshot"
-  },
-  "editor_rectangle_tooltip": {
-    "message": "Add a rectangle"
-  },
-  "editor_circle_tooltip": {
-    "message": "Add an ellipse"
-  },
-  "editor_text_tooltip": {
-    "message": "Add text"
-  },
-  "editor_blur_tooltip": {
-    "message": "Drag to blur"
-  },
-  "editor_line_tooltip": {
-    "message": "Add a line"
-  },
-  "editor_pencil_tooltip": {
-    "message": "Free Line"
-  },
-  "editor_undo_tooltip": {
-    "message": "Undo"
-  },
-  "editor_local_tooltip": {
-    "message": "Save to local disk"
-  },
-  "editor_copy_tooltip": {
-    "message": "Copy"
-  },
-  "editor_cancel_tooltip": {
-    "message": "Close"
-  },
-  "editor_lineWidth_tooltip": {
-    "message": "Line Width"
-  },
-  "editor_fontSize_tooltip": {
-    "message": "Font Size"
-  },
-  "editor_crop_instruction": {
-    "message": "Drag to start, double click to finish"
-  },
-  "save_file_name": {
-    "message": "Firefox_Screenshot_$TIMESTAMP$.png",
-    "placeholders": {
-      "timestamp" : {
-        "content" : "$1"
-      }
-    }
-  },
-  "save_success": {
-    "message": "Screenshot saved"
-  },
-  "save_failure": {
-    "message": "Unable to save screenshot"
-  },
-  "copy_success": {
-    "message": "Screenshot copied to clipboard"
-  },
-  "copy_failure": {
-    "message": "Unable to copy screenshot to clipboard"
   },
   "action_select": {
     "message": "Capture Web Page Region"
@@ -93,11 +22,5 @@
   },
   "action_visible": {
     "message": "Capture Visible Web Content"
-  },
-  "action_settings": {
-    "message": "Settings"
-  },
-  "action_feedback": {
-    "message": "Feedback"
   }
 }
