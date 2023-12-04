@@ -1,26 +1,26 @@
 {
   "browserActionTitle": {
-    "message": "Easy Screenshot"
+    "message": "Firefox Screenshot to Google Lens"
   },
   "extensionDescription": {
-    "message": "You can capture a screen shot by selecting an area or capture the whole/visible webpage. Then edit and save it as an image file."
+    "message": "This extension lets you send to Google Lens a screenshot of a web page either in viewport, in selection area or in full size!"
   },
   "extensionName": {
-    "message": "Easy Screenshot"
+    "message": "Firefox Screenshot to Google Lens"
   },
   "minPanelWidth": {
     "message": "18em"
   },
   "generic_crop_instruction": {
-    "message": "Drag to start, double click or press Enter to finish"
+    "message": "Click and hold to highlight the desired area and release to finish"
   },
   "action_select": {
-    "message": "Capture Web Page Region"
+    "message": "Selection"
   },
   "action_entire": {
-    "message": "Capture Whole Web Page"
+    "message": "Full Page"
   },
   "action_visible": {
-    "message": "Capture Visible Web Content"
+    "message": "Visible Area"
   }
 }
