@@ -9,7 +9,7 @@
     "message": "Firefox Screenshot to Google Lens"
   },
   "minPanelWidth": {
-    "message": "18em"
+    "message": "8em"
   },
   "generic_crop_instruction": {
     "message": "Click and hold to highlight the desired area and release to finish"
