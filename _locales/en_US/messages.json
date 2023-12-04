@@ -3,7 +3,7 @@
     "message": "Firefox Screenshot to Google Lens"
   },
   "extensionDescription": {
-    "message": "This extension lets you send to Google Lens a screenshot of a web page either in viewport, in selection area or in full size!"
+    "message": "This extension lets you choose an area of the webpage to send to Google Lens."
   },
   "extensionName": {
     "message": "Firefox Screenshot to Google Lens"
